@@ -1,4 +1,3 @@
-from ast import Delete
 import pickle
 
 with open('dictionary.pkl', 'rb') as f:
@@ -6,7 +5,7 @@ with open('dictionary.pkl', 'rb') as f:
 
 def ask():
     del_check = 0
-    print("what do you want to do")
+    print("what do you want to do: ")
     print("1. new word")
     print("2. delete word")
     print("3. view dictinary")
@@ -27,7 +26,8 @@ def ask():
         else:
             delete()
     elif q == '3' or q == 'view dictinary' or q == 'view':
-        print(stuff)
+        for k,v in stuff.items():
+            print(f"{k}:{v}")
         print("")
         ask()
     elif q == '4':
@@ -60,6 +60,8 @@ def inputthings():
             del stuff[en]
             inputthings()
         else:
+            print("ok")
+            print("")
             ask()
 
 def delete():
@@ -67,6 +69,7 @@ def delete():
         print(f"{k}:{v}")
     print("what wordset would you like to delete ")
     delet = input("")
+    print("")
     if delet in stuff:
         del stuff[stuff[delet]]
         del stuff[delet]
@@ -74,62 +77,41 @@ def delete():
         print("")
         ask()
     else:
-        print("that word isnt in the list would you like to try again")
+        print("that word isnt in the list would you like to:")
+        print("1. try again")
+        print("2. add it to the dictionary")
+        print("3. stop")
         no_word = input("")
-        if no_word == "yes":
-            Delete()
-        else:
+        if no_word == "1" or no_word == "try again" or no_word == "again":
+            print("")
+            delete()
+        elif no_word == "add" or no_word == "2":
+            print("")
+            inputthings()
+        elif no_word == "stop" or no_word == "3":
+            print("")
             ask()
 
 def tra():
-    print("do you want to translate from: ")
-    print("1. english to dutch")
-    print("2. dutch to english")
-    tr = input("")
+    print("what word do you want to translate?")
+    t = input("")
     print("")
-    if tr == '1' or tr == 'en' or tr == 'english' or tr == 'english to dutch':
-        print("what word do you want to translate?")
-        t = input("")
+    if t in stuff:
+        print("the tranlation of that woord is: " + stuff[t])
         print("")
-        if t in stuff:
-            print("the tranlation of that woord is: " + stuff[t])
+        ask()
+    else:
+        print("that word doesnt exist")
+        print("would you like to add it? ")
+        print("1. yes")
+        print("2. no")
+        add = input("")
+        print("")
+        if add == '1' or add == 'yes':
+            inputthings()
+        else:
+            print("ok")
             print("")
             ask()
-        else:
-            print("that word doesnt exist")
-            print("would you like to add it? ")
-            print("1. yes")
-            print("2. no")
-            add = input("")
-            print("")
-            if add == '1' or add == 'yes':
-                inputthings()
-            else:
-                print("ok")
-                print("")
-                ask()
-    elif tr == '2' or tr == 'ne' or tr == 'dutch' or tr == 'dutch to english':
-        print("what word do you want to translate?")
-        t = input("")
-        print("")
-        if t in stuff:
-            print("the tranlation of that woord is: " + stuff[t])
-            print("")
-            ask()
-        else:
-            print("that word doesnt exist")
-            print("would you like to add it? ")
-            print("1. yes")
-            print("2. no")
-            add = input("")
-            print("")
-            if add == '1' or add == 'yes':
-                inputthings()
-            else:
-                print("ok")
-                print("")
-                ask()
-
-
-
+    
 ask()
