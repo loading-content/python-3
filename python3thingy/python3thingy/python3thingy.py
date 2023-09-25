@@ -14,21 +14,21 @@ def ask(stuff):
     print("3. view dictinary")
     print("4. translate")
     print("5. stop")
-    q = input("")
+    select = input("")
     print("")
 
-    if q == '1' or q == 'new word' or q == 'new':
+    if select == '1' or select == 'new word' or select == 'new':
         inputthings(stuff)
-    elif q == '2' or q == 'delete word' or q == 'delete':
+    elif select == '2' or select == 'delete word' or select == 'delete':
         delete_check(stuff, del_check)
-    elif q == '3' or q == 'view dictinary' or q == 'view':
+    elif select == '3' or select == 'view dictinary' or select == 'view':
         for k,v in stuff.items():
             print(f"{k}:{v}")
         print("")
         ask(stuff)
-    elif q == '4':
-        tra(stuff)
-    elif q == '5' or q == 'stop':
+    elif select == '4':
+        translate(stuff)
+    elif select == '5' or select == 'stop':
         with open('dictionary.pkl', 'wb') as f:
             pickle.dump(stuff, f)
         exit()
@@ -65,7 +65,7 @@ def delete_check(stuff, del_check):
     for k in stuff.items():
         del_check += 1
     if del_check <= 2:
-        print("you only have one wordset in the dictionary so if you do this the program will stop working")
+        print("you only have one wordset in the dictionary so if you do this the program will stop working so i'm not allowing this")
         print(" ")
         ask(stuff)
     else:
@@ -103,12 +103,12 @@ def no_exist(stuff):
         print("")
         ask(stuff)
 
-def tra(stuff):
+def translate(stuff):
     print("what word do you want to translate?")
     t = input("")
     print("")
     if t in stuff:
-        print("the tranlation of that woord is: " + stuff[t])
+        print("the translation of that woord is: " + stuff[t])
         print("")
         ask(stuff)
     else:
